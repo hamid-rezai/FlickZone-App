@@ -48,13 +48,8 @@ async function displayPopularMovies() {
 }
 // Display popular tv shows
 async function displayPopularShows() {
-  const data = await fetchAPIData("tv/popular");
-  console.log("Fetched TV Shows Data:",data);
-  if(!data || !data.results) {
-    console.error("Error:TV show data not recieved");
-    return;
-  }
-  const { results } = data;
+  const { results } = await fetchAPIData("tv/popular");
+  console.log(results);
   results.forEach((tv) => {
     const div = document.createElement("div");
     div.classList.add("card");
