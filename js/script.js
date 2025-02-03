@@ -394,23 +394,12 @@ async function fetchAPIData(endpoint) {
   const API_URL = global.api.apiUrl;
   showSpinner();
 
-  try{
-    const response = await fetch(
-      `${API_URL}${endpoint}?api_key=${API_Key}&language=en-US&timestamp=${new Date().getTime()}`
-    );
-    if(!response.ok){
-      throw new Error(`HTTP error! status:${response.status}`);
-    }
-
-    const data = await response.json();
-    hideSpinner();
-    return data;
-  }catch (error) {
-    console.error("Error fetching data:",error);
-    hideSpinner();
-    return {results:[]};
-  }
-
+  const response = await fetch(
+    `${API_URL}${endpoint}?api_key=${API_Key}&language=en-US&timestamp=${new Date().getTime()}`
+  );
+  const data = await response.json();
+  hideSpinner();
+  return data;
 }
 
 // Make Request To Search
@@ -472,7 +461,6 @@ function init() {
       break;
 
     case "/shows.html":
-      console.log("loading popular tv shows ...");
       displayPopularShows();
       break;
 
